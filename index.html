@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Lokendra Verma | Technical Architect</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#08080f;
+  --bg2:#0e0e1a;
+  --bg3:#13131f;
+  --cyan:#00e5ff;
+  --green:#00ff88;
+  --purple:#7c3aed;
+  --text:#e2e8f0;
+  --muted:#64748b;
+  --border:#1e2240;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--cyan);border-radius:3px;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,8,15,0.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;}
+.nav-logo{font-family:'JetBrains Mono',monospace;color:var(--cyan);font-size:1rem;font-weight:700;letter-spacing:2px;}
+.nav-logo span{color:var(--green);}
+.nav-links{display:flex;gap:1.5rem;list-style:none;}
+.nav-links a{color:var(--muted);text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:0.75rem;letter-spacing:1px;transition:color .3s;}
+.nav-links a:hover{color:var(--cyan);}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;padding:6rem 2rem 4rem;text-align:center;overflow:hidden;}
+.grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(0,229,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,.03) 1px,transparent 1px);background-size:40px 40px;}
+.glow-orb{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(0,229,255,.08),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
+.hero-content{position:relative;z-index:1;}
+.hero-tag{font-family:'JetBrains Mono',monospace;color:var(--green);font-size:.8rem;letter-spacing:3px;margin-bottom:1rem;opacity:.8;}
+.hero-name{font-family:'JetBrains Mono',monospace;font-size:clamp(2.5rem,6vw,5rem);font-weight:700;line-height:1.1;margin-bottom:1rem;}
+.hero-name .first{color:var(--text);}
+.hero-name .last{color:var(--cyan);text-shadow:0 0 30px rgba(0,229,255,.4);}
+.hero-title{font-family:'JetBrains Mono',monospace;font-size:clamp(.9rem,2vw,1.2rem);color:var(--muted);margin-bottom:.5rem;}
+#typed{color:var(--green);}
+.cursor{display:inline-block;width:2px;height:1.2em;background:var(--green);margin-left:2px;animation:blink .7s infinite;vertical-align:middle;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+.hero-desc{max-width:600px;margin:1.5rem auto;color:var(--muted);font-size:.95rem;line-height:1.7;}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2rem;}
+.btn{font-family:'JetBrains Mono',monospace;font-size:.8rem;letter-spacing:1px;padding:.75rem 1.8rem;border-radius:4px;text-decoration:none;transition:all .3s;cursor:pointer;border:none;}
+.btn-primary{background:var(--cyan);color:#08080f;font-weight:700;}
+.btn-primary:hover{box-shadow:0 0 20px rgba(0,229,255,.4);transform:translateY(-2px);}
+.btn-outline{background:transparent;color:var(--cyan);border:1px solid var(--cyan);}
+.btn-outline:hover{background:rgba(0,229,255,.08);transform:translateY(-2px);}
+.hero-contacts{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;margin-top:1.5rem;}
+.hero-contacts a{color:var(--muted);font-size:.8rem;font-family:'JetBrains Mono',monospace;text-decoration:none;transition:color .3s;}
+.hero-contacts a:hover{color:var(--cyan);}
+.scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--muted);letter-spacing:2px;animation:bounce 2s infinite;}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(-6px);}}
+
+/* SECTIONS */
+section{padding:5rem 2rem;}
+.container{max-width:1000px;margin:0 auto;}
+.section-label{font-family:'JetBrains Mono',monospace;color:var(--green);font-size:.75rem;letter-spacing:3px;margin-bottom:.5rem;}
+.section-title{font-family:'JetBrains Mono',monospace;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:700;color:var(--text);margin-bottom:.5rem;}
+.section-title span{color:var(--cyan);}
+.divider{width:60px;height:2px;background:linear-gradient(90deg,var(--cyan),transparent);margin-bottom:3rem;}
+
+/* ABOUT */
+#about{background:var(--bg2);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
+.about-text p{color:var(--muted);line-height:1.8;margin-bottom:1rem;font-size:.95rem;}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.stat-card{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:1.2rem;text-align:center;transition:border-color .3s;}
+.stat-card:hover{border-color:var(--cyan);}
+.stat-num{font-family:'JetBrains Mono',monospace;font-size:2rem;font-weight:700;color:var(--cyan);}
+.stat-label{font-size:.75rem;color:var(--muted);margin-top:.3rem;letter-spacing:1px;}
+
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
+.skill-cat{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:1.5rem;transition:border-color .3s,transform .3s;}
+.skill-cat:hover{border-color:var(--cyan);transform:translateY(-4px);}
+.skill-cat-title{font-family:'JetBrains Mono',monospace;color:var(--cyan);font-size:.8rem;letter-spacing:2px;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;}
+.skill-cat-title::before{content:'>';color:var(--green);}
+.tags{display:flex;flex-wrap:wrap;gap:.5rem;}
+.tag{background:rgba(0,229,255,.06);border:1px solid rgba(0,229,255,.15);color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.3rem .7rem;border-radius:3px;letter-spacing:.5px;transition:all .3s;}
+.tag:hover{background:rgba(0,229,255,.15);border-color:var(--cyan);color:var(--cyan);}
+
+/* EXPERIENCE */
+#experience{background:var(--bg2);}
+.timeline{position:relative;padding-left:2rem;}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--cyan),var(--purple),transparent);}
+.tl-item{position:relative;margin-bottom:3rem;padding-bottom:1rem;}
+.tl-dot{position:absolute;left:-2.4rem;top:.4rem;width:12px;height:12px;background:var(--cyan);border-radius:50%;box-shadow:0 0 12px var(--cyan);}
+.tl-header{margin-bottom:1rem;}
+.tl-role{font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:700;color:var(--cyan);}
+.tl-company{color:var(--text);font-size:.95rem;margin:.2rem 0;}
+.tl-date{font-family:'JetBrains Mono',monospace;color:var(--green);font-size:.75rem;letter-spacing:1px;}
+.tl-list{list-style:none;margin-top:.8rem;}
+.tl-list li{color:var(--muted);font-size:.88rem;line-height:1.7;padding:.25rem 0;padding-left:1rem;position:relative;}
+.tl-list li::before{content:'▹';color:var(--cyan);position:absolute;left:0;}
+
+/* PROJECTS */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;}
+.proj-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:1.5rem;text-align:center;transition:all .3s;cursor:default;}
+.proj-card:hover{border-color:var(--green);transform:translateY(-6px);box-shadow:0 0 20px rgba(0,255,136,.08);}
+.proj-icon{font-size:2rem;margin-bottom:.8rem;}
+.proj-name{font-family:'JetBrains Mono',monospace;color:var(--text);font-size:.9rem;font-weight:600;}
+.proj-tag{font-size:.7rem;color:var(--green);margin-top:.4rem;letter-spacing:1px;}
+
+/* AWARDS */
+#awards{background:var(--bg2);}
+.awards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
+.award-card{background:linear-gradient(135deg,var(--bg3),rgba(0,229,255,.03));border:1px solid var(--border);border-radius:8px;padding:2rem;position:relative;overflow:hidden;transition:all .3s;}
+.award-card:hover{border-color:var(--cyan);transform:translateY(-4px);}
+.award-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--green));}
+.award-icon{font-size:2.5rem;margin-bottom:1rem;}
+.award-title{font-family:'JetBrains Mono',monospace;color:var(--cyan);font-size:.9rem;font-weight:700;margin-bottom:.3rem;}
+.award-date{font-family:'JetBrains Mono',monospace;color:var(--green);font-size:.7rem;letter-spacing:1px;margin-bottom:.8rem;}
+.award-desc{color:var(--muted);font-size:.85rem;line-height:1.7;}
+
+/* EDUCATION */
+.edu-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:2rem;display:flex;align-items:center;gap:2rem;transition:border-color .3s;}
+.edu-card:hover{border-color:var(--cyan);}
+.edu-icon{font-size:3rem;flex-shrink:0;}
+.edu-degree{font-family:'JetBrains Mono',monospace;color:var(--cyan);font-size:1rem;font-weight:700;}
+.edu-school{color:var(--text);margin:.3rem 0;font-size:.95rem;}
+.edu-grade{font-family:'JetBrains Mono',monospace;color:var(--green);font-size:.8rem;letter-spacing:1px;margin-top:.5rem;}
+
+/* CONTACT */
+#contact{background:var(--bg2);}
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;}
+.contact-card{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:1.5rem;text-align:center;transition:all .3s;}
+.contact-card:hover{border-color:var(--cyan);transform:translateY(-4px);}
+.contact-icon{font-size:1.8rem;margin-bottom:.8rem;}
+.contact-label{font-family:'JetBrains Mono',monospace;color:var(--muted);font-size:.7rem;letter-spacing:2px;margin-bottom:.5rem;}
+.contact-value{color:var(--cyan);font-size:.85rem;font-family:'JetBrains Mono',monospace;word-break:break-all;}
+.contact-value a{color:inherit;text-decoration:none;}
+.contact-value a:hover{text-decoration:underline;}
+
+/* FOOTER */
+footer{background:var(--bg);border-top:1px solid var(--border);padding:2rem;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--muted);}
+footer span{color:var(--cyan);}
+
+/* FADE IN */
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;}
+.fade-in.visible{opacity:1;transform:none;}
+
+@media(max-width:700px){
+  .about-grid{grid-template-columns:1fr;}
+  .nav-links{display:none;}
+  .edu-card{flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">LV<span>.</span>dev</div>
+  <ul class="nav-links">
+    <li><a href="#about">about</a></li>
+    <li><a href="#skills">skills</a></li>
+    <li><a href="#experience">experience</a></li>
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#awards">awards</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="grid-bg"></div>
+  <div class="glow-orb"></div>
+  <div class="hero-content">
+    <div class="hero-tag">// TECHNICAL ARCHITECT</div>
+    <h1 class="hero-name">
+      <div class="first">Lokendra</div>
+      <div class="last">Verma</div>
+    </h1>
+    <div class="hero-title"><span id="typed"></span><span class="cursor"></span></div>
+    <p class="hero-desc">Transforming complex business needs into scalable, high-performance engineering solutions. Building systems that exceed expectations — from architecture to deployment.</p>
+    <div class="hero-btns">
+      <a href="#experience" class="btn btn-primary">View Experience</a>
+      <a href="#contact" class="btn btn-outline">Get In Touch</a>
+    </div>
+    <div class="hero-contacts">
+      <a href="mailto:lokendraverma35@gmail.com">📧 lokendraverma35@gmail.com</a>
+      <a href="tel:+917770999156">📞 +91-777-099-9156</a>
+      <a href="#" target="_blank">🔗 LinkedIn</a>
+    </div>
+  </div>
+  <div class="scroll-hint">↓ SCROLL</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container fade-in">
+    <div class="section-label">// 01. ABOUT</div>
+    <h2 class="section-title">Who I <span>Am</span></h2>
+    <div class="divider"></div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm a Technical Architect who focuses on transforming customer needs into clear, actionable engineering plans. I work closely with teams to deliver high-quality, scalable solutions from start to finish, always keeping business goals in mind.</p>
+        <p>By maintaining open communication, gathering feedback, and prioritizing quality, I ensure that the products we create meet and exceed expectations.</p>
+        <p>Currently leading architecture at <strong style="color:var(--cyan)">American Chase LLP</strong>, with 7+ years of hands-on experience across the full stack — from backend APIs to cloud infrastructure.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="stat-num">8+</div>
+          <div class="stat-label">YEARS EXP</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">9+</div>
+          <div class="stat-label">PROJECTS</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">60%</div>
+          <div class="stat-label">PAGE LOAD BOOST</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">40%</div>
+          <div class="stat-label">DEPLOY TIME ↓</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container fade-in">
+    <div class="section-label">// 02. SKILLS</div>
+    <h2 class="section-title">Tech <span>Stack</span></h2>
+    <div class="divider"></div>
+    <div class="skills-grid">
+      <div class="skill-cat">
+        <div class="skill-cat-title">Languages & Frameworks</div>
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">Django</span><span class="tag">DRF</span><span class="tag">PHP</span><span class="tag">Laravel</span><span class="tag">JavaScript</span><span class="tag">jQuery</span><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Bootstrap</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-title">Cloud & DevOps</div>
+        <div class="tags">
+          <span class="tag">AWS EC2</span><span class="tag">AWS RDS</span><span class="tag">AWS S3</span><span class="tag">AWS Lambda</span><span class="tag">VPC</span><span class="tag">Docker</span><span class="tag">GitHub Actions</span><span class="tag">GitLab CI/CD</span><span class="tag">Nginx</span><span class="tag">Apache</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-title">Databases</div>
+        <div class="tags">
+          <span class="tag">PostgreSQL</span><span class="tag">MySQL</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-title">Integrations</div>
+        <div class="tags">
+          <span class="tag">Stripe</span><span class="tag">Flutterwave</span><span class="tag">Mailchimp</span><span class="tag">Twilio</span><span class="tag">AWS SES</span><span class="tag">Google OAuth</span><span class="tag">Facebook Login</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-title">Tools & Utilities</div>
+        <div class="tags">
+          <span class="tag">Postman</span><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">GitLab</span><span class="tag">PDFKit</span><span class="tag">WeasyPrint</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-title">Focus Areas</div>
+        <div class="tags">
+          <span class="tag">API Architecture</span><span class="tag">Cloud Deployment</span><span class="tag">Payment Integrations</span><span class="tag">Automation</span><span class="tag">System Security</span><span class="tag">GDPR</span><span class="tag">HIPAA</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container fade-in">
+    <div class="section-label">// 03. EXPERIENCE</div>
+    <h2 class="section-title">Work <span>History</span></h2>
+    <div class="divider"></div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-header">
+          <div class="tl-role">Technical Architect</div>
+          <div class="tl-company">American Chase LLP</div>
+          <div class="tl-date">June 2023 – Present (May 2026)</div>
+        </div>
+        <ul class="tl-list">
+          <li>Led design of scalable, high-performance systems — setting tech standards and aligning with business goals</li>
+          <li>Mentored engineering teams, conducted code reviews, and enforced best practices for reliability</li>
+          <li>Translated complex business needs into clear technical roadmaps for stakeholders and executives</li>
+          <li>Designed cloud-native AWS solutions with a focus on security, scalability, and cost optimization</li>
+          <li>Reduced average API response time from 1.2s to 450ms and improved page load time by 60%</li>
+          <li>Reduced deployment time by 40% through CI/CD workflows with GitHub Actions and Docker</li>
+          <li>Ensured compliance with GDPR, HIPAA, and SOC2 industry standards</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--green);box-shadow:0 0 12px var(--green)"></div>
+        <div class="tl-header">
+          <div class="tl-role" style="color:var(--green)">Senior Software Engineer</div>
+          <div class="tl-company">Codezilla Technology & Consultancy Pvt. Ltd.</div>
+          <div class="tl-date">September 2019 – January 2023</div>
+        </div>
+        <ul class="tl-list">
+          <li>Designed and developed RESTful APIs using Django & DRF for scalable, production-level applications</li>
+          <li>Built full-stack subscription systems integrating Stripe and Flutterwave for recurring payments</li>
+          <li>Implemented secure login with SMS-based auth, social login, and role-based access controls</li>
+          <li>Deployed on AWS — managing EC2, RDS, S3 and custom VPCs for network isolation</li>
+          <li>Built and maintained CI/CD pipelines using GitHub Actions and GitLab CI</li>
+          <li>Integrated Mailchimp for automated marketing and AWS SES for transactional email delivery</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--purple);box-shadow:0 0 12px var(--purple)"></div>
+        <div class="tl-header">
+          <div class="tl-role" style="color:var(--purple)">Software Engineer</div>
+          <div class="tl-company">Diastark Technologies Pvt. Ltd.</div>
+          <div class="tl-date">September 2018 – August 2019</div>
+        </div>
+        <ul class="tl-list">
+          <li>Built and maintained web applications using PHP (Laravel and CodeIgniter)</li>
+          <li>Took full ownership of solo projects — architecture, backend logic, and MySQL database management</li>
+          <li>Developed systems across e-commerce, logistics, staff scheduling, and donation platforms</li>
+          <li>Integrated with Locus for automated CSV-based order uploads and delivery tracking</li>
+          <li>Built responsive interfaces using jQuery, JavaScript, HTML, CSS, and Ajax</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container fade-in">
+    <div class="section-label">// 04. PROJECTS</div>
+    <h2 class="section-title">Built <span>Projects</span></h2>
+    <div class="divider"></div>
+    <div class="projects-grid">
+      <div class="proj-card"><div class="proj-icon">⭐</div><div class="proj-name">Stell</div><div class="proj-tag">WEB APP</div></div>
+      <div class="proj-card"><div class="proj-icon">🛡️</div><div class="proj-name">GulfTrust Insurance</div><div class="proj-tag">FINTECH</div></div>
+      <div class="proj-card"><div class="proj-icon">🎫</div><div class="proj-name">Smartpass</div><div class="proj-tag">PLATFORM</div></div>
+      <div class="proj-card"><div class="proj-icon">💡</div><div class="proj-name">Youlans</div><div class="proj-tag">WEB APP</div></div>
+      <div class="proj-card"><div class="proj-icon">👥</div><div class="proj-name">ProvideMy Staff</div><div class="proj-tag">STAFFING</div></div>
+      <div class="proj-card"><div class="proj-icon">❤️</div><div class="proj-name">Charity Aidon</div><div class="proj-tag">NONPROFIT</div></div>
+      <div class="proj-card"><div class="proj-icon">🖱️</div><div class="proj-name">DD-Click</div><div class="proj-tag">TOOL</div></div>
+      <div class="proj-card"><div class="proj-icon">📊</div><div class="proj-name">EPMS</div><div class="proj-tag">MANAGEMENT</div></div>
+      <div class="proj-card"><div class="proj-icon">🎵</div><div class="proj-name">Jamboy</div><div class="proj-tag">PLATFORM</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section id="awards">
+  <div class="container fade-in">
+    <div class="section-label">// 05. RECOGNITION</div>
+    <h2 class="section-title">Awards & <span>Honors</span></h2>
+    <div class="divider"></div>
+    <div class="awards-grid">
+      <div class="award-card">
+        <div class="award-icon">🌟</div>
+        <div class="award-title">Sole Star Leader Award</div>
+        <div class="award-date">June 2024</div>
+        <div class="award-desc">Recognized for consistently delivering tasks ahead of schedule and handling even the most unexpected or complex requirements with ease — always finding a way to complete challenging tasks.</div>
+      </div>
+      <div class="award-card">
+        <div class="award-icon">🏆</div>
+        <div class="award-title">Best Performer Award</div>
+        <div class="award-date">September 2023</div>
+        <div class="award-desc">Recognized for consistently delivering exactly what was needed with minimal input. Valued for full ownership, clarity, accountability, and execution — fewer meetings, precise high-impact results.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="container fade-in">
+    <div class="section-label">// 06. EDUCATION</div>
+    <h2 class="section-title">Academic <span>Background</span></h2>
+    <div class="divider"></div>
+    <div class="edu-card">
+      <div class="edu-icon">🎓</div>
+      <div>
+        <div class="edu-degree">Bachelor of Engineering</div>
+        <div class="edu-school">Technocrats Institute of Technology, Bhopal</div>
+        <div class="edu-grade">CGPA: 7.25 / 10.0</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container fade-in">
+    <div class="section-label">// 07. CONTACT</div>
+    <h2 class="section-title">Get In <span>Touch</span></h2>
+    <div class="divider"></div>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-icon">📧</div>
+        <div class="contact-label">EMAIL</div>
+        <div class="contact-value"><a href="mailto:lokendraverma35@gmail.com">lokendraverma35@gmail.com</a></div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">📞</div>
+        <div class="contact-label">PHONE</div>
+        <div class="contact-value"><a href="tel:+917770999156">+91-777-099-9156</a></div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">📍</div>
+        <div class="contact-label">LOCATION</div>
+        <div class="contact-value">Indore, Madhya Pradesh</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">🔗</div>
+        <div class="contact-label">LINKEDIN</div>
+        <div class="contact-value"><a href="#" target="_blank">View Profile</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Designed & Built with <span>♥</span> · Lokendra Verma · <span>2025</span></p>
+  <p style="margin-top:.5rem;font-size:.65rem;">lokendraverma35@gmail.com</p>
+</footer>
+
+<script>
+// TYPING ANIMATION
+const phrases = ["Technical Architect","Full Stack Developer","Cloud & DevOps Engineer","API Architecture Specialist"];
+let pi=0,ci=0,del=false;
+const el=document.getElementById('typed');
+function type(){
+  const cur=phrases[pi];
+  if(!del){
+    el.textContent=cur.slice(0,++ci);
+    if(ci===cur.length){del=true;setTimeout(type,1800);return;}
+  } else {
+    el.textContent=cur.slice(0,--ci);
+    if(ci===0){del=false;pi=(pi+1)%phrases.length;setTimeout(type,400);return;}
+  }
+  setTimeout(type,del?60:90);
+}
+type();
+
+// FADE IN ON SCROLL
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.12});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
